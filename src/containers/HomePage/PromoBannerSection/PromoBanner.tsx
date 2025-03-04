@@ -2,7 +2,12 @@ import React from 'react';
 import {Box, Button, Container, Typography} from "@mui/material";
 import Image from "next/image";
 
-const CountdownItem = ({value, label}) => (
+interface CountdownItemProps {
+    value: string;
+    label: string;
+}
+
+const CountdownItem: React.FC<CountdownItemProps> = ({value, label}) => (
     <Typography component={'div'} sx={{
         display: 'flex',
         alignItems: 'center',
