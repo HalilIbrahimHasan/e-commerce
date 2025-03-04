@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import {Box, Container, Typography, IconButton, Stack, styled, Divider, Theme} from '@mui/material';
+import {Box, Container, Typography, IconButton, Stack, styled, Divider} from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ComputerIcon from '@mui/icons-material/Computer';
