@@ -137,10 +137,10 @@ const Navbar = () => {
                             </SearchIconWrapper>
                         </SearchWrapper>
                         <Typography component={'div'}>
-                            <IconButton color="black">
+                            <IconButton sx={{ color: 'black' }}>
                                 <FavoriteIcon />
                             </IconButton>
-                            <IconButton color="black">
+                            <IconButton sx={{ color: 'black' }}>
                                 <ShoppingCartIcon />
                             </IconButton>
                         </Typography>
