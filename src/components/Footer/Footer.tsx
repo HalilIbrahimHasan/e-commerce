@@ -95,8 +95,8 @@ const Footer = () => {
                                 <Image
                                     src="/assets/png/qr-code.png"
                                     alt="QR Code"
-                                    layout="fill"
-                                    objectFit="fill"
+                                    fill
+                                    style={{ objectFit: 'fill' }}
                                 />
                             </Box>
                             <Stack spacing={1}>
@@ -104,16 +104,16 @@ const Footer = () => {
                                     <Image
                                         src="/assets/png/google-play-store.png"
                                         alt="Google Play"
-                                        layout="fill"
-                                        objectFit="contain"
+                                        fill
+                                        style={{ objectFit: 'contain' }}
                                     />
                                 </Box>
                                 <Box sx={{ width: '120px', height: '40px', position: 'relative' }}>
                                     <Image
                                         src="/assets/png/app-store.png"
                                         alt="App Store"
-                                        layout="fill"
-                                        objectFit="contain"
+                                        fill
+                                        style={{ objectFit: 'contain' }}
                                     />
                                 </Box>
                             </Stack>
