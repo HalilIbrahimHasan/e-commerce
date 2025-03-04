@@ -13,6 +13,7 @@ import {
     Stack,
     styled,
     Divider,
+    Theme,
 } from '@mui/material';
 import {
     Favorite,
@@ -20,6 +21,52 @@ import {
     KeyboardArrowLeft,
     KeyboardArrowRight,
 } from '@mui/icons-material';
+
+interface Product {
+    id: string | number;
+    name: string;
+    price: number;
+    oldPrice?: number;
+    discount?: number;
+    rating: number;
+    reviews: number;
+    image: string;
+    colors?: string[];
+}
+
+interface FlashSalesProps {
+    subtitle: string;
+    subtitleColor?: string;
+    title: string;
+    products: Product[];
+    showTimer?: boolean;
+    onAddToCart?: boolean;
+    btnOpen?: boolean;
+    viewBtnOpen?: boolean;
+    viewBtnOpenColor?: string;
+    viewBtnOpenText?: string;
+    viewBtnOpenTextColor?: string;
+    discountBadgeColor?: string;
+    discountBadgeText?: string;
+    enableSlider?: boolean;
+    cardsPerRow?: number;
+}
+
+interface DiscountBadgeProps {
+    color?: string;
+    theme?: Theme;
+}
+
+interface TimeState {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
+}
+
+interface SelectedColors {
+    [key: string]: string;
+}
 
 const SectionDivider = styled(Divider)(({}) => ({
     margin: '48px 0',
@@ -38,11 +85,11 @@ const ProductCard = styled(Card)(({}) => ({
     },
 }));
 
-const DiscountBadge = styled(Box)(({color}) => ({
+const DiscountBadge = styled(Box)((props: DiscountBadgeProps) => ({
     position: 'absolute',
     top: 12,
     left: 12,
-    backgroundColor: color || '#DB4444',
+    backgroundColor: props.color || '#DB4444',
     color: 'white',
     padding: '4px 8px',
     borderRadius: '4px',
@@ -92,7 +139,7 @@ const TimerBox = styled(Box)(({}) => ({
     borderRadius: '4px',
 }));
 
-const FlashSales = ({
+const FlashSales: React.FC<FlashSalesProps> = ({
                         subtitle,
                         subtitleColor,
                         title,
@@ -109,27 +156,24 @@ const FlashSales = ({
                         enableSlider = true,
                         cardsPerRow = 4,
                     }) => {
-    // Client/Server uyumsuzluğu önlemek için bir isClient state'i ekleyelim
-    const [isClient, setIsClient] = useState(false);
-    const [currentTime, setCurrentTime] = useState({
+    const [isClient, setIsClient] = useState<boolean>(false);
+    const [currentTime, setCurrentTime] = useState<TimeState>({
         days: 3,
         hours: 23,
         minutes: 19,
         seconds: 56,
     });
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [selectedColors, setSelectedColors] = useState({});
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
+    const [selectedColors, setSelectedColors] = useState<SelectedColors>({});
 
-    // Sayfa yüklendiğinde isClient'ı true yap
     useEffect(() => {
         setIsClient(true);
     }, []);
 
     useEffect(() => {
-        // Sadece client tarafında ve isClient true olduğunda timer başlat
         if (isClient && showTimer) {
             const timer = setInterval(() => {
-                setCurrentTime((prev) => {
+                setCurrentTime((prev: TimeState) => {
                     if (prev.seconds > 0) {
                         return {...prev, seconds: prev.seconds - 1};
                     } else if (prev.minutes > 0) {
@@ -147,16 +191,16 @@ const FlashSales = ({
         }
     }, [showTimer, isClient]);
 
-    const handleSlide = (direction) => {
+    const handleSlide = (direction: 'left' | 'right') => {
         if (direction === 'left') {
-            setCurrentIndex((prev) => Math.max(prev - 1, 0));
+            setCurrentIndex((prev: number) => Math.max(prev - 1, 0));
         } else {
-            setCurrentIndex((prev) => Math.min(prev + 1, Math.ceil(products.length / cardsPerRow) - 1));
+            setCurrentIndex((prev: number) => Math.min(prev + 1, Math.ceil(products.length / cardsPerRow) - 1));
         }
     };
 
-    const handleColorSelect = (productId, color) => {
-        setSelectedColors((prev) => ({...prev, [productId]: color}));
+    const handleColorSelect = (productId: string | number, color: string) => {
+        setSelectedColors((prev: SelectedColors) => ({...prev, [productId.toString()]: color}));
     };
 
     const visibleProducts = enableSlider
