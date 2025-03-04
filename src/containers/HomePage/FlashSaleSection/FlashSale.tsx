@@ -85,13 +85,6 @@ function FlashSale() {
         }
     ];
 
-    const currentTime = {
-        days: 2,
-        hours: 5,
-        minutes: 30,
-        seconds: 15,
-    };
-
     return (
         <FlashSales
             subtitle={"today's"}
@@ -99,9 +92,8 @@ function FlashSale() {
             title="Flash Sales"
             showTimer={true}
             products={products}
-            currentTime={currentTime}
             discountBadgeColor={'#DB4444'}
-            showSlider
+            enableSlider={true}
             viewBtnOpen={false}
             viewBtnOpenColor={'#DB4444'}
             viewBtnOpenText={'View All'}
