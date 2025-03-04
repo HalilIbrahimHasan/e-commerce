@@ -11,10 +11,9 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 interface CategoryBoxProps {
     active?: string;
-    theme?: Theme;
 }
 
-const SectionDivider = styled(Divider)(({  }) => ({
+const SectionDivider = styled(Divider)(({}) => ({
     marginTop: '58px',
     marginBottom: '58px',
     marginLeft: '-12px',
@@ -23,7 +22,7 @@ const SectionDivider = styled(Divider)(({  }) => ({
     width: '100%'
 }));
 
-const CategoryBox = styled(Box)<CategoryBoxProps>(({ active, theme }) => ({
+const CategoryBox = styled(Box)<CategoryBoxProps>(({ active }) => ({
     width: '170px',
     height: '145px',
     display: 'flex',
