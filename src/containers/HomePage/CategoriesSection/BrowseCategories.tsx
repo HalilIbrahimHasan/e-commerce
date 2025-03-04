@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import {Box, Container, Typography, IconButton, Stack, styled, Divider} from '@mui/material';
+import {Box, Container, Typography, IconButton, Stack, styled, Divider, Theme} from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ComputerIcon from '@mui/icons-material/Computer';
@@ -8,6 +8,11 @@ import WatchIcon from '@mui/icons-material/Watch';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+
+interface CategoryBoxProps {
+    active?: string;
+    theme?: Theme;
+}
 
 const SectionDivider = styled(Divider)(({  }) => ({
     marginTop: '58px',
@@ -18,7 +23,7 @@ const SectionDivider = styled(Divider)(({  }) => ({
     width: '100%'
 }));
 
-const CategoryBox = styled(Box)(({active }) => ({
+const CategoryBox = styled(Box)<CategoryBoxProps>(({ active, theme }) => ({
     width: '170px',
     height: '145px',
     display: 'flex',
@@ -59,7 +64,7 @@ const BrowseCategories = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const itemsPerView = 6;
 
-    const handleSlide = (direction) => {
+    const handleSlide = (direction: 'left' | 'right') => {
         if (direction === 'left') {
             setCurrentIndex(prev => Math.max(prev - 1, 0));
         } else {
